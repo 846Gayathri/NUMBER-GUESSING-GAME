@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<header class="main-header">
+    <img src="{{ url_for('static', filename='header-logo.webp') }}" alt="Game Logo" class="logo">
+    <h2>Number Guessing Game 🎯</h2>
+</header>
+<body>
+    <div class="container">
+        <h1>🎯 Number Guessing Game</h1>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        {% if not game_over %}
+            <p class="subtitle">🔢 Guess a number between 1 and 100</p>
+            <p class="attempts">🔁 Attempts left: <strong>{{ attempts }}</strong></p>
+            <form method="POST" class="form">
+                <input type="number" name="guess" min="1" max="100" required placeholder="Enter your guess">
+                <button type="submit">Submit Guess</button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('restart') }}"><button class="play-again">🔁 Play Again</button></a>
+        {% endif %}
+    </div>
+</body>
+</html>
